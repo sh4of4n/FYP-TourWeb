@@ -243,7 +243,7 @@
                                     <a href="web\booking.php" class="fa-copy">Bookings</a>
                                 </li>
                                 <li>
-                                    <a href="pages-login.php" class="fa-font">Login</a>
+                                    <a href="pages-sign-up.php" class="fa-font">Login</a>
                                 </li>
                                 <li>
                                     <a href="contact.php" class="fa-comment">Contact Us</a>

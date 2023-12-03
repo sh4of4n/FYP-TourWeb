@@ -110,7 +110,7 @@
 								$rs=mysqli_query($con,$sql);
 								if(mysqli_num_rows($rs)>0)
 								{
-									echo "<table border='1px' align='center' cellpadding='20px' cellspacing='10px'>";
+									echo "<table border='2px' align='center' cellpadding='20px' cellspacing='10px'>";
 									echo "<tr align='center'>";
 									echo "<th>FLIGHT NAME</th>";
 									echo "<th>FLIGHT FROM</th>";
@@ -132,10 +132,13 @@
 											echo "<td>$row[6]</td>";
 											echo "<td>$row[7]</td>";
 											echo "<td>$row[8]</td>";
+                                            echo "<td><a href='user_booking.php?id=".$row[0]."&class=".$row[7]."'>Book</a></td>";
 											echo "</tr>";
 										}
 										echo "</table>";
-									}
+									} else {
+                                        echo "<p> NO FLIGHTS FOUND </p>";
+                                    }
 								}
 							?>
 						</div>

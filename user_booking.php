@@ -103,9 +103,12 @@
 									
 									if(isset($_POST["btn1"]))
 									{
+                                        $email=$_POST["t2"];
+                                        $no_of_traveller=$_POST["t3"];
 										$book_id=$_GET["id"];
-										echo "<script>alert('Booking Successful. Your Booking Id is $book_id')</script>";
-										echo "<script>window.location.href='user_login.php'</script>";	
+                                        $class=$_GET["class"];
+										// echo "<script>alert('Booking Successful. Your Booking Id is $book_id')</script>";
+										echo "<script>window.location.href='booking_details.php?id=$book_id&email=$email&traveller=$no_of_traveller&class=$class'</script>";	
 									}
 								?>
                             </div>

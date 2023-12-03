@@ -97,7 +97,7 @@
                 <div class="container background-white">
 					<div class="row margin-vert-30">
                         <div class="col-md-12">
-						<h1 style="text-align:center">FLIGHT DETAILS</h1>
+						<h1 style="text-align:center">CABS DETAILS</h1>
 						<?php
 							$con=mysqli_connect("localhost","root","","tour_database");
 							if(!$con)
@@ -124,10 +124,13 @@
 											echo "<td>&nbsp;&nbsp;$row[2]&nbsp;&nbsp;</td>";
 											echo "<td>&nbsp;&nbsp;$row[3]&nbsp;&nbsp;</td>";
 											echo "<td>&nbsp;&nbsp;$row[4]&nbsp;&nbsp;</td>";
+                                            echo "<td><a href='user_booking.php?id=".$row[0]."&class=".trim($row[1])."'>Book</a></td>";
 											echo "</tr>";
 										}
 										echo "</table>";
-									}
+									} else {
+                                        echo "<p> NO CABS FOUND </p>";
+                                    }
 								}
 							?>
 						</div>
