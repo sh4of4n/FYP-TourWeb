@@ -119,10 +119,17 @@ if (isset($_SESSION["reg_name"])) {
                                                                         "currency" => "myr",
                                                                         "unit_amount" => intval(str_replace("RM", "", $row[5]))*100* $no_of_traveller,
                                                                         "product_data" => [
-                                                                            "name" => "$name, $email, $book_id, $no_of_traveller person, $row[1], $row[2], $row[3], $row[4]",
-                                                                        ]
+                                                                            "name" => "$name", 
+                                                                            // "email" => "$email", 
+                                                                            // "book_id" => "$book_id, $no_of_traveller person, $row[1], $row[2], $row[3], $row[4]",
+                                                                        ],
                                                                     ]
                                                                 ]
+                                                                    ],
+                                                            "custom_fields" => [
+                                                                "name" => "$name", 
+                                                                "email" => "$email", 
+                                                                "book_id" => "$book_id, $no_of_traveller person, $row[1], $row[2], $row[3], $row[4]",
                                                             ]
                                                         ]);
 
@@ -377,6 +384,16 @@ if (isset($_SESSION["reg_name"])) {
                                 <br>Pulau Pinang,
                                 <br>Malaysia.
                             </p>
+                        </div>
+                        <div class="col-md-3 margin-bottom-20">
+                            <h3 class="margin-bottom-10">Menu</h3>
+                            <ul class="menu">
+                                
+                                <li>
+                                    <a href="web/booking.php" class="fa-copy">Bookings</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
                         </div>
                         <div class="col-md-4"></div>
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">

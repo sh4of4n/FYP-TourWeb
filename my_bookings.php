@@ -1,21 +1,30 @@
 <?php
 	session_start();
+	if(isset($_SESSION["reg_name"]))
+	{
+        $name = $_SESSION["reg_name"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Login Form</title>
+        <!-- Title -->
+        <title>SHOW DETAILS </title>
+        <!-- Meta -->
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="">
         <meta name="author" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <!-- Favicon -->
         <link href="favicon.ico" rel="shortcut icon">
+        <!-- Bootstrap Core CSS -->
         <link rel="stylesheet" href="assets/css/bootstrap.css" rel="stylesheet">
+        <!-- Template CSS -->
         <link rel="stylesheet" href="assets/css/animate.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/nexus4.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/nexus1.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/responsive.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/custom.css" rel="stylesheet">
+        <!-- Google Fonts-->
         <link href="http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300" rel="stylesheet" type="text/css">
         <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
@@ -37,6 +46,7 @@
                 </li>
             </ul>
             <div id="pre-header" class="container" style="height: 40px">
+                <!-- Spacing above header -->
             </div>
             <div id="header">
                 <div class="container">
@@ -53,7 +63,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding">
                         <div class="text-center visible-lg">
-                            <ul id="hornavmenu" class="nav navbar-nav">
+                            <!-- <ul id="hornavmenu" class="nav navbar-nav">
                                 <li>
                                     <a href="index.html" class="fa-home">Home</a>
                                 </li>
@@ -69,18 +79,15 @@
                                         <li>
                                             <a href="destination.html">Destinations</a>
                                         </li>
-                                        <li>
-                                            <a href="web\booking.php"> Travel Bookings</a>
-                                        </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="pages-sign-up.php"  class="fa-font">Register/Log In</a>
+									<a href="pages-sign-up.php"  class="fa-font">Register/Log In</a>
                                 </li>
                                 <li>
                                     <a href="contact.html" class="fa-comment">Contact Us</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>
@@ -91,65 +98,102 @@
             </div>
             <div id="content">
                 <div class="container background-white">
-                    <div class="container">
-                        <div class="row margin-vert-30">
-                            <div class="col-md-6 col-md-offset-3 col-sm-offset-3">
-                                <form class="login-page" method="post">
-                                    <div class="login-header margin-bottom-30">
-                                        <h2>Login to your account</h2>
-                                    </div>
-                                    <div class="input-group margin-bottom-20">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-user"></i>
-                                        </span>
-                                        <input placeholder="Admin Name" class="form-control" type="text" name="t1">
-                                    </div>
-                                    <div class="input-group margin-bottom-20">
-                                        <span class="input-group-addon">
-                                            <i class="fa fa-lock"></i>
-                                        </span>
-                                        <input placeholder="Password" class="form-control" type="password" name="t2">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button class="btn btn-primary pull-right" type="submit" name="btn1">Login</button>
-                                        </div>
-                                    </div>
-                                    <hr>
-                                </form>
-								<?php
-				
-									if(isset($_POST["btn1"]))
-									{
-										$name=$_POST["t1"];
-										$pass=$_POST["t2"];
-					
-										include("connect.php");
-										$sql="select* from admin_register where admin_name='".$name."' and admin_pass='".$pass."'";
-										$rs=mysqli_query($con,$sql);
-										if(mysqli_num_rows($rs)==1)
-										{
-											$_SESSION["admin"]=$name;
-											echo "<script>alert('Login Successful')</script>";
-											echo "<script>window.location.href='pages-admin.php'</script>";	
-										}
-										else
-										{
-											echo "<script>alert('Login Unsuccessful')</script>";
-											echo "<script>window.location.href='admin_login.php'</script>";
-										}
-									}
-								?>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+					<div class="row margin-vert-30">
+                        <div class="col-md-12">
+						<h1 style="text-align:center">MY BOOKING DETAILS</h1>
+						<?php
+                            require_once 'vendor/autoload.php';
+
+                            \Stripe\Stripe::setApiKey("sk_test_51OGKRDLTlinqyYUr9gofHxlictq5WgnMaGmglvdkZh3OwP80MiL0zlyFf7vq7eCYJREllqsx948iCzNNov5coPAo006JS32Y8B"); // Replace with your Stripe secret key
+                            
+                            $payload = @file_get_contents('php://input');
+                            $event = null;
+                            
+                            try {
+                                $event = \Stripe\Event::constructFrom(
+                                    json_decode($payload, true)
+                                );
+                            } catch (\UnexpectedValueException $e) {
+                                // Invalid payload
+                                http_response_code(400);
+                                exit();
+                            }
+                            switch ($event->type) {
+                                case 'checkout.session.completed':
+                                    $session = $event->data->object;
+                            
+                                    // Retrieve payment details from the session object
+                                    $paymentIntent = $session->payment_intent;
+                                    $customerEmail = $session->customer_email;
+                            
+                                    // Process or display the payment details as needed
+                                    // ...
+                                    $sql = "INSERT INTO bookings (id, name) VALUES ('$customerEmail', '$paymentIntent')";
+                                    mysqli_query($conn, $sql);
+                                    break;
+                            
+                                // Handle other events as needed
+                            
+                                default:
+                                    // Unhandled event type
+                            }
+                            
+                            http_response_code(200);
+
+
+
+							// $con=mysqli_connect("localhost","root","","tour_database");
+							// if(!$con)
+							// 	die("cannot connect to server");
+							// else
+							// {
+							// 	$here=$_POST["c1"];
+							// 	$there=$_POST["c2"];
+							// 	$sql="select * from flight_search where flight_from='".$here."' and flight_to='".$there."'";
+							// 	$rs=mysqli_query($con,$sql);
+							// 	if(mysqli_num_rows($rs)>0)
+							// 	{
+							// 		echo "<table border='2px' align='center' cellpadding='20px' cellspacing='10px'>";
+							// 		echo "<tr align='center'>";
+							// 		echo "<th>FLIGHT NAME</th>";
+							// 		echo "<th>FLIGHT FROM</th>";
+							// 		echo "<th>FLIGHT TO</th>";
+							// 		echo "<th>FLIGHT DEPARTURE TIME</th>";
+							// 		echo "<th>FLIGHT ARRIVAL TIME</th>";
+							// 		echo "<th>TRAVEL CLASS</th>";
+							// 		echo "<th>JOURNEY TYPE</th>";
+							// 		echo "<th>FLIGHT PRICE</th>";
+							// 		echo "</tr>";
+							// 		while($row=mysqli_fetch_row($rs))
+							// 			{
+							// 				echo "<tr align='center'>";
+							// 				echo "<td>$row[1]</td>";
+							// 				echo "<td>$row[2]</td>";
+							// 				echo "<td>$row[3]</td>";
+							// 				echo "<td>$row[4]</td>";
+							// 				echo "<td>$row[5]</td>";
+							// 				echo "<td>$row[6]</td>";
+							// 				echo "<td>$row[7]</td>";
+							// 				echo "<td>$row[8]</td>";
+                            //                 echo "<td><a href='user_booking.php?id=".$row[0]."&class=".$row[7]."'>Book</a></td>";
+							// 				echo "</tr>";
+							// 			}
+							// 			echo "</table>";
+							// 		} else {
+                            //             echo "<p> NO BOOKINGS FOUND </p>";
+                            //         }
+							// 	}
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
             <div id="content-bottom-border" class="container">
             </div>
             <div id="base">
                 <div class="container padding-vert-30 margin-top-60">
                     <div class="row">
+                        <!-- Contact Details -->
                         <div class="col-md-4 margin-bottom-20">
                             <h3 class="margin-bottom-10">Contact Details</h3>
                             <p>
@@ -162,30 +206,23 @@
                                 <a href="index.html">www.TragendaTour&Travel.com</a>
                             </p>
                             <p><br><b>Address :</b>
-								<br>77, Lorong Lembah Permai Tiga,
-                                <br>11200 Tanjong Bungah,
-                                <br>Pulau Pinang, 
-                                <br>Malaysia.</p>
+								<br>QUEST MALL,
+                                <br>Syed Amir Ali Ave Park Circus,
+                                <br>Ballygunge,
+                                <br>Kolkata, India</p>
                         </div>
                         <div class="col-md-3 margin-bottom-20">
-                            <h3 class="margin-bottom-10">Menu</h3>
-                            <ul class="menu">
-                                <li>
-                                    <a href="index.html" class="fa-home">Home</a>
-                                </li>
-                                <li>
-                                    <a href="pages-about-us.html" class="fa-gears">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="pages-sign-up.php" class="fa-font">Login</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html" class="fa-comment">Contact Us</a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
-                        <!-- End Menu -->
+						<h3 class="margin-bottom-10">Menu</h3>
+						<ul class="menu">
+							<li>
+								<a href="./user_login.php" class="fa-home">Home</a>
+							</li>
+							<li>
+								<a href="./web/booking.php" class="fa-copy">Bookings</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
                         <div class="col-md-1"></div>
                         <!-- Disclaimer -->
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
@@ -198,41 +235,32 @@
                             <br>
                             <button class="btn btn-primary btn-lg margin-top-20" style="background-color:aqua" type="button"><a href="assets/Brochure1.docx">Subscribe</a></button>
                         </div>
-                        <!-- End Disclaimer -->
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
-            <!-- Footer Menu -->
             <div id="footer">
                 <div class="container">
                     <div class="row">
                         <div id="footermenu" class="col-md-8">
                         </div>
                         <div id="copyright" class="col-md-4">
-                            <p class="pull-right" style="width: 400px; background-color: cadetblue; color: white; text-align: center;">&copy; Copyright Tragenda Tours And Treavel 2000. All Rights Reserved.</p>
+                            <p class="pull-right" style="background: rgba(0, 0, 0, 0.53); color:#fff; width:450px; text-align:center">&copy; Copyright TragendaTour&Travel 2000. All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End Footer Menu -->
-            <!-- JS -->
             <script type="text/javascript" src="assets/js/jquery.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="assets/js/bootstrap.min.js" type="text/javascript"></script>
             <script type="text/javascript" src="assets/js/scripts.js"></script>
-            <!-- Isotope - Portfolio Sorting -->
             <script type="text/javascript" src="assets/js/jquery.isotope.js" type="text/javascript"></script>
-            <!-- Mobile Menu - Slicknav -->
             <script type="text/javascript" src="assets/js/jquery.slicknav.js" type="text/javascript"></script>
-            <!-- Animate on Scroll-->
             <script type="text/javascript" src="assets/js/jquery.visible.js" charset="utf-8"></script>
-            <!-- Sticky Div -->
             <script type="text/javascript" src="assets/js/jquery.sticky.js" charset="utf-8"></script>
-            <!-- Slimbox2-->
             <script type="text/javascript" src="assets/js/slimbox2.js" charset="utf-8"></script>
-            <!-- Modernizr -->
             <script src="assets/js/modernizr.custom.js" type="text/javascript"></script>
-            <!-- End JS -->
     </body>
 </html>
-<!-- === END FOOTER === -->
+<?php
+}
+?>

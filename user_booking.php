@@ -138,6 +138,16 @@
                                 <br>Pulau Pinang, 
                                 <br>Malaysia.</p>
                         </div>
+                        <div class="col-md-3 margin-bottom-20">
+                            <h3 class="margin-bottom-10">Menu</h3>
+                            <ul class="menu">
+                                
+                                <li>
+                                    <a href="web/booking.php" class="fa-copy">Bookings</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
                         <div class="col-md-4"></div>
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
                             <h3 class="color-gray margin-bottom-10">Join our Newsletter</h3>

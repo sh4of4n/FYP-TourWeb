@@ -91,9 +91,6 @@
                                         <li>
                                             <a href="destination.html">Destinations</a>
                                         </li>
-                                        <li>
-                                            <a href="web\booking.php">Bookings</a>
-                                        </li>
                                     </ul>
                                 </li>
                                 <li>
@@ -229,18 +226,15 @@
                                 <br>Malaysia.</p>
                         </div>
                         <!-- End Contact Details -->
-                        <!-- Sample Menu -->
+                        <!-- Menu -->
                         <div class="col-md-3 margin-bottom-20">
-                            <h3 class="margin-bottom-10">Sample Menu</h3>
+                            <h3 class="margin-bottom-10">Menu</h3>
                             <ul class="menu">
                                 <li>
                                     <a href="index.html" class="fa-home">Home</a>
                                 </li>
                                 <li>
                                     <a href="pages-about-us.html" class="fa-gears">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="web\booking.php" class="fa-copy">Bookings</a>
                                 </li>
                                 <li>
                                     <a href="pages-sign-up.php" class="fa-font">Login</a>
@@ -251,7 +245,7 @@
                             </ul>
                             <div class="clearfix"></div>
                         </div>
-                        <!-- End Sample Menu -->
+                        <!-- End Menu -->
                         <div class="col-md-1"></div>
                         <!-- Disclaimer -->
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">

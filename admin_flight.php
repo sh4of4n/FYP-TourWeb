@@ -131,9 +131,9 @@
                             </div>
                         </div>
 						<?php
-							if(isset($_POST["btn3"]))
+							if(isset($_POST["btn5"]))
 							{
-								echo "<script>window.location.href='update1.php'</script>";	
+								echo "<script>window.location.href='pages-admin.php'</script>";	
 							}
 						?>
 					</div>

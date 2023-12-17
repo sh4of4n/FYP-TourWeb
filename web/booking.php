@@ -63,7 +63,7 @@
 			<div class="row">
 				<div class="col-md-12 no-padding">
 					<div class="text-center visible-lg">
-						<ul id="hornavmenu" class="nav navbar-nav">
+						<!-- <ul id="hornavmenu" class="nav navbar-nav">
 							<li>
 								<a href="../index.html" class="fa-home">Home</a>
 							</li>
@@ -90,7 +90,7 @@
 							<li>
 								<a href="../contact.php" class="fa-comment">Contact Us</a>
 							</li>
-						</ul>
+						</ul> -->
 					</div>
 				</div>
 			</div>
@@ -475,14 +475,14 @@
 						</p>
 					</div>
 					<!-- End Contact Details -->
-					<!-- Sample Menu -->
+					<!-- Menu -->
 					<div class="col-md-3 margin-bottom-20">
-						<h3 class="margin-bottom-10">Sample Menu</h3>
+						<h3 class="margin-bottom-10">Menu</h3>
 						<ul class="menu">
 							<li>
-								<a href="../index.html" class="fa-home">Home</a>
+								<a href="../user_login.php" class="fa-home">Home</a>
 							</li>
-							<li>
+							<!-- <li>
 								<a href="../pages-about-us.html" class="fa-gears">About Us</a>
 							</li>
 							<li>
@@ -493,11 +493,11 @@
 							</li>
 							<li>
 								<a href="../contact.php" class="fa-comment">Contact Us</a>
-							</li>
+							</li> -->
 						</ul>
 						<div class="clearfix"></div>
 					</div>
-					<!-- End Sample Menu -->
+					<!-- End Menu -->
 					<div class="col-md-1"></div>
 					<!-- Disclaimer -->
 					<div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">

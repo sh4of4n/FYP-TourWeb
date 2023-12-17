@@ -57,7 +57,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding">
                         <div class="text-center visible-lg">
-                            <ul id="hornavmenu" class="nav navbar-nav">
+                            <!-- <ul id="hornavmenu" class="nav navbar-nav">
                                 <li>
                                     <a href="index.html" class="fa-home">Home</a>
                                 </li>
@@ -73,9 +73,6 @@
                                         <li>
                                             <a href="destination.html">Destinations</a>
                                         </li>
-                                        <li>
-                                            <a href="web\booking.php">Travel Bookings</a>
-                                        </li>
                                     </ul>
                                 </li>
                                 <li>
@@ -84,7 +81,7 @@
                                 <li>
                                     <a href="contact.html" class="fa-comment">Contact Us</a>
                                 </li>
-                            </ul>
+                            </ul> -->
                         </div>
                     </div>
                 </div>
@@ -163,26 +160,17 @@
                                 <br>Malaysia.</p>
                         </div>
                         <div class="col-md-3 margin-bottom-20">
-                            <h3 class="margin-bottom-10">Sample Menu</h3>
-                            <ul class="menu">
-                                <li>
-                                    <a href="index.html" class="fa-home">Home</a>
-                                </li>
-                                <li>
-                                    <a href="pages-about-us.html" class="fa-gears">About Us</a>
-                                </li>
-                                <li>
-                                    <a href="web\booking.php" class="fa-copy">Bookings</a>
-                                </li>
-                                <li>
-                                    <a href="pages-sign-up.php" class="fa-font">Login</a>
-                                </li>
-                                <li>
-                                    <a href="contact.php" class="fa-comment">Contact Us</a>
-                                </li>
-                            </ul>
-                            <div class="clearfix"></div>
-                        </div>
+						<h3 class="margin-bottom-10">Menu</h3>
+						<ul class="menu">
+							<li>
+								<a href="./user_login.php" class="fa-home">Home</a>
+							</li>
+							<li>
+								<a href="./web/booking.php" class="fa-copy">Bookings</a>
+							</li>
+						</ul>
+						<div class="clearfix"></div>
+					</div>
                         <div class="col-md-1"></div>
                         <!-- Disclaimer -->
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
