@@ -353,11 +353,11 @@
 				$pass=$_POST["password"];
 				
 				include("connect.php");
-				$sql="insert into tour_register(reg_name,reg_email,reg_phone,reg_pass)value('".$name."','".$email."','".$phone."','".$pass."')";
+				$sql="INSERT INTO tour_register(reg_name,reg_email,reg_phone,reg_pass)VALUE('$name','$email','$phone','$pass')";
 				$n=mysqli_query($con,$sql);
 				if($n==1)
 				{
-					$q1="select reg_id from tour_register where reg_name='".$name."' and reg_email='".$email."' and reg_pass='".$pass."'";
+					$q1="SELECT reg_id FROM tour_register WHERE reg_name='$name' AND reg_email='$email' AND reg_pass='$pass'";
 					$rs=mysqli_query($con,$q1);
 					if(mysqli_num_rows($rs)>0)
 					{

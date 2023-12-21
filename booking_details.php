@@ -83,6 +83,7 @@ if (isset($_SESSION["reg_name"])) {
                                         else {
                                             $book_id = $_GET["id"];
                                             $class = $_GET["class"];
+                                            $booking_id = $_GET["booking_id"];
                                             if ($class = "1STAR" || $class = "2STAR" || $class = "3STAR" || $class = "4STAR" || $class = "5STAR") {
                                                 $sql = "SELECT * FROM hotel_search WHERE hotel_id = $book_id";
                                                 $rs = mysqli_query($con, $sql);
@@ -102,6 +103,10 @@ if (isset($_SESSION["reg_name"])) {
                                                     echo "<p>Room Type: $row[4]</p>";
                                                     echo "<p>Room Price: $row[5]</p>";
                                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+                                                        $price = intval(str_replace("RM", "", $row[5]))* $no_of_traveller;
+                                                        $sql_update = "UPDATE bookings SET booking_status = 'Paid', booking_price = 'RM$price', booking_details = '$row[1], $row[2], $row[3], $row[4]' WHERE booking_id = '$booking_id'";
+                                                        $result_update = mysqli_query($con, $sql_update);
                                                         require __DIR__ . "/vendor/autoload.php";
 
                                                         $stripe_secret_key = "sk_test_51OGKRDLTlinqyYUr9gofHxlictq5WgnMaGmglvdkZh3OwP80MiL0zlyFf7vq7eCYJREllqsx948iCzNNov5coPAo006JS32Y8B";
@@ -119,19 +124,14 @@ if (isset($_SESSION["reg_name"])) {
                                                                         "currency" => "myr",
                                                                         "unit_amount" => intval(str_replace("RM", "", $row[5]))*100* $no_of_traveller,
                                                                         "product_data" => [
-                                                                            "name" => "$name", 
-                                                                            // "email" => "$email", 
-                                                                            // "book_id" => "$book_id, $no_of_traveller person, $row[1], $row[2], $row[3], $row[4]",
-                                                                        ],
+                                                                            "name" => "$name, $email, $book_id, $no_of_traveller person, $row[1], $row[2], $row[3], $row[4]",
+                                                                        ]
                                                                     ]
                                                                 ]
-                                                                    ],
-                                                            "custom_fields" => [
-                                                                "name" => "$name", 
-                                                                "email" => "$email", 
-                                                                "book_id" => "$book_id, $no_of_traveller person, $row[1], $row[2], $row[3], $row[4]",
                                                             ]
                                                         ]);
+
+                                                        
 
                                                         http_response_code(303);
                                                         header("Location:" . $checkout_session->url);
@@ -160,6 +160,10 @@ if (isset($_SESSION["reg_name"])) {
                                                     echo "<p>Flight Type: $row[7]</p>";
                                                     echo "<p>Flight Price: $row[8]</p>";
                                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                        $price = intval(str_replace("RM", "", $row[8]))* $no_of_traveller;
+                                                        $sql_update = "UPDATE bookings SET booking_status = 'Paid', booking_price = 'RM$price', booking_details = '$row[1], Flight From: $row[2] to $row[3] ,Flight Time: $row[4] -> $row[5],$row[6], $row[7]' WHERE booking_id = '$booking_id'";
+                                                        $result_update = mysqli_query($con, $sql_update);
+
                                                         require __DIR__ . "/vendor/autoload.php";
 
                                                         $stripe_secret_key = "sk_test_51OGKRDLTlinqyYUr9gofHxlictq5WgnMaGmglvdkZh3OwP80MiL0zlyFf7vq7eCYJREllqsx948iCzNNov5coPAo006JS32Y8B";
@@ -175,7 +179,7 @@ if (isset($_SESSION["reg_name"])) {
                                                                     "quantity" => 1,
                                                                     "price_data" => [
                                                                         "currency" => "myr",
-                                                                        "unit_amount" => intval(str_replace("RM", "", $row[8]))*100*$no_of_traveller, 
+                                                                        "unit_amount" => intval(str_replace("RM", "", $row[8]))*100* $no_of_traveller, 
                                                                         "product_data" => [
                                                                             "name" => "$name, $email, $book_id, $no_of_traveller person, $row[1], Flight From: $row[2] to $row[3] ,Flight Time: $row[4] -> $row[5],$row[6], $row[7]",
                                                                         ]
@@ -211,6 +215,10 @@ if (isset($_SESSION["reg_name"])) {
                                                     echo "<p>Travel Type: $row[7]</p>";
                                                     echo "<p>Train Price: $row[8]</p>";
                                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                        $price = intval(str_replace("RM", "", $row[8]))* $no_of_traveller;
+                                                        $sql_update = "UPDATE bookings SET booking_status = 'Paid', booking_price = 'RM$price', booking_details = '$row[1], Train From: $row[2] to $row[3], Train Time: $row[4] -> $row[5] , $row[6], $row[7]' WHERE booking_id = '$booking_id'";
+                                                        $result_update = mysqli_query($con, $sql_update);
+
                                                         require __DIR__ . "/vendor/autoload.php";
 
                                                         $stripe_secret_key = "sk_test_51OGKRDLTlinqyYUr9gofHxlictq5WgnMaGmglvdkZh3OwP80MiL0zlyFf7vq7eCYJREllqsx948iCzNNov5coPAo006JS32Y8B";
@@ -260,6 +268,10 @@ if (isset($_SESSION["reg_name"])) {
                                                     echo "<p>Hotel Name: $row[6] ($row[7])</p>";
                                                     echo "<p>Tour Price: $row[8]</p>";
                                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                        $price = intval(str_replace("RM", "", $row[8]))* $no_of_traveller;
+                                                        $sql_update = "UPDATE bookings SET booking_status = 'Paid', booking_price = 'RM$price', booking_details = '$row[1], Tour Date: $row[2] , $row[3], $row[5] , $row[6] ($row[7])' WHERE booking_id = '$booking_id'";
+                                                        $result_update = mysqli_query($con, $sql_update);
+                                                        
                                                         require __DIR__ . "/vendor/autoload.php";
 
                                                         $stripe_secret_key = "sk_test_51OGKRDLTlinqyYUr9gofHxlictq5WgnMaGmglvdkZh3OwP80MiL0zlyFf7vq7eCYJREllqsx948iCzNNov5coPAo006JS32Y8B";
@@ -307,6 +319,10 @@ if (isset($_SESSION["reg_name"])) {
                                                     echo "<p>Cab To: $row[3]</p>";
                                                     echo "<p>Cab Price: $row[4]</p>";
                                                     if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                                        $price = intval(str_replace("RM", "", $row[4]))* $no_of_traveller;
+                                                        $sql_update = "UPDATE bookings SET booking_status = 'Paid', booking_price = 'RM$price', booking_details = '$row[1], Cab From: $row[2] to $row[3]' WHERE booking_id = '$booking_id'";
+                                                        $result_update = mysqli_query($con, $sql_update);
+
                                                         require __DIR__ . "/vendor/autoload.php";
 
                                                         $stripe_secret_key = "sk_test_51OGKRDLTlinqyYUr9gofHxlictq5WgnMaGmglvdkZh3OwP80MiL0zlyFf7vq7eCYJREllqsx948iCzNNov5coPAo006JS32Y8B";

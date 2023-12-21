@@ -1,14 +1,9 @@
-<?php
-	session_start();
-	if(isset($_SESSION["reg_name"]))
-	{
-        $name = $_SESSION["reg_name"];
-?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Title -->
-        <title>SHOW DETAILS </title>
+        <title>SHOW DETAILS TO ADMIN</title>
         <!-- Meta -->
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="">
@@ -46,7 +41,6 @@
                 </li>
             </ul>
             <div id="pre-header" class="container" style="height: 40px">
-                <!-- Spacing above header -->
             </div>
             <div id="header">
                 <div class="container">
@@ -63,31 +57,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding">
                         <div class="text-center visible-lg">
-                            <!-- <ul id="hornavmenu" class="nav navbar-nav">
-                                <li>
-                                    <a href="index.html" class="fa-home">Home</a>
-                                </li>
-                                <li>
-                                    <a href="pages-about-us.html" class="fa-gears">About Us</a>
-                                </li>    
-                                <li>
-                                    <a href="gallery.html" class="fa-th">Gallery</a>
-                                </li>
-                                <li>
-                                    <span class="fa-copy">Features</span>
-									<ul>
-                                        <li>
-                                            <a href="destination.html">Destinations</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-									<a href="pages-sign-up.php"  class="fa-font">Register/Log In</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html" class="fa-comment">Contact Us</a>
-                                </li>
-                            </ul> -->
+                            
                         </div>
                     </div>
                 </div>
@@ -100,54 +70,38 @@
                 <div class="container background-white">
 					<div class="row margin-vert-30">
                         <div class="col-md-12">
-						<h1 style="text-align:center">MY BOOKINGS</h1>
-						<?php
-							$con=mysqli_connect("localhost","root","","tour_database");
-							if(!$con)
-								die("cannot connect to server");
-							else
-							{
-								$sql="SELECT * FROM bookings WHERE booking_name = '$name'";
-								$rs=mysqli_query($con,$sql);
-								if(mysqli_num_rows($rs)>0)
-								{
-									echo "<table border='2px' align='center' cellpadding='20px' cellspacing='10px'>";
-									echo "<tr align='center'>";
-									echo "<th>BOOKING ID</th>";
-									echo "<th>BOOKING TYPE</th>";
-                                    echo "<th>BOOKING NAME</th>";
-									echo "<th>BOOKING EMAIL</th>";
-									echo "<th>NO OF TRAVELLER</th>";
-									echo "<th>BOOKING STATUS</th>";
-									echo "<th>PRICE PAID</th>";
-									echo "</tr>";
-									while($row=mysqli_fetch_row($rs))
-										{
-											echo "<tr align='center'>";
-											echo "<td>$row[1]</td>";
-											echo "<td>$row[2]</td>";
-											echo "<td>$row[3]</td>";
-											echo "<td>$row[4]</td>";
-											echo "<td>$row[5]</td>";
-											echo "<td>$row[8]</td>";
-											echo "<td>$row[6]</td>";
-                                            echo "<td><a href='#' onclick=\"showDetails('$row[7]')\">DETAILS</a></td>";
-											echo "</tr>";
-										}
-										echo "</table>";
-									} else {
-                                        echo "<p> NO BOOKINGS FOUND </p>";
-                                    }
-								}
-							?>
-                            <script>
-                            function showDetails(details) {
-                                var detailsArray = details.split(',');
-                                var detailsString = detailsArray.join('\n'); 
-
-                                alert(detailsString);
-                            }
-                            </script>
+						<form method="post" action="#">
+			<pre>
+				<label>SELECT USER BOOKING NAME</label>
+				<select name="t1">
+					<?php
+						include("connect.php");
+						$sql="SELECT DISTINCT booking_name FROM bookings";
+						$rs=mysqli_query($con,$sql);
+						while($row=mysqli_fetch_array($rs))
+						{
+								?>
+							<option value="<?=$row[0]?>">
+								<?=$row[0]?>
+							</option>
+								<?php
+						}
+					?>
+				</select>
+				
+				<input type="submit" name="btn1" value="Show Data">
+				
+				<?php
+		
+					if(isset($_POST["btn1"]))
+					{
+						$name=$_POST["t1"];
+						
+						echo "<script>window.location.href='show_details.php?name=$name'</script>";
+					}
+				?>
+			</pre>
+		</form>
 						</div>
 					</div>
 				</div>
@@ -157,7 +111,6 @@
             <div id="base">
                 <div class="container padding-vert-30 margin-top-60">
                     <div class="row">
-                        <!-- Contact Details -->
                         <div class="col-md-4 margin-bottom-20">
                             <h3 class="margin-bottom-10">Contact Details</h3>
                             <p>
@@ -170,25 +123,22 @@
                                 <a href="index.html">www.TragendaTour&Travel.com</a>
                             </p>
                             <p><br><b>Address :</b>
-								<br>QUEST MALL,
-                                <br>Syed Amir Ali Ave Park Circus,
-                                <br>Ballygunge,
-                                <br>Kolkata, India</p>
+                            <br>77, Lorong Lembah Permai Tiga,
+                                <br>11200 Tanjong Bungah,
+                                <br>Pulau Pinang,
+                                <br>Malaysia.</p>
                         </div>
                         <div class="col-md-3 margin-bottom-20">
-						<h3 class="margin-bottom-10">Menu</h3>
-						<ul class="menu">
-							<li>
-								<a href="./user_login.php" class="fa-home">Home</a>
-							</li>
-							<li>
-								<a href="./web/booking.php" class="fa-copy">Bookings</a>
-							</li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-                        <div class="col-md-1"></div>
-                        <!-- Disclaimer -->
+                            <h3 class="margin-bottom-10">Menu</h3>
+                            <ul class="menu">
+                                
+                                <li>
+                                    <a href="./pages-admin.php" class="fa-copy">Admin Page</a>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-md-4"></div>
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
                             <h3 class="color-gray margin-bottom-10">Join our Newsletter</h3>
                             <p>
@@ -225,6 +175,3 @@
             <script src="assets/js/modernizr.custom.js" type="text/javascript"></script>
     </body>
 </html>
-<?php
-}
-?>

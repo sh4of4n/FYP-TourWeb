@@ -121,7 +121,7 @@
 											echo "<td>&nbsp;&nbsp;$row[2]&nbsp;&nbsp;</td>";
 											echo "<td>&nbsp;&nbsp;$row[3]&nbsp;&nbsp;</td>";
 											echo "<td>&nbsp;&nbsp;$row[4]&nbsp;&nbsp;</td>";
-                                            echo "<td><a href='user_booking.php?id=".$row[0]."&class=".trim($row[1])."'>Book</a></td>";
+                                            echo "<td><a href='user_booking.php?id=".$row[0]."&class=".trim($row[1])."&type=".'cab'."'>Book</a></td>";
 											echo "</tr>";
 										}
 										echo "</table>";

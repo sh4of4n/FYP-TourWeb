@@ -286,7 +286,6 @@
 													<h5>Loaction*</h5>
 													<select id="category1" name="c34" required="">
 														<option value="England">England</option>
-														<option value="SIKKIM">Sikkim</option>
 														<option value="KERALA">Kerala</option>
 														<option value="GOA">Goa</option>
 														<option value="RAJASTHAN">Rajasthan</option>
@@ -481,6 +480,9 @@
 						<ul class="menu">
 							<li>
 								<a href="../user_login.php" class="fa-home">Home</a>
+							</li>
+							<li>
+								<a href="../my_bookings.php" class="fa-copy">My Bookings</a>
 							</li>
 							<!-- <li>
 								<a href="../pages-about-us.html" class="fa-gears">About Us</a>

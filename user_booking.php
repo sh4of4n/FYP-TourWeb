@@ -107,8 +107,35 @@
                                         $no_of_traveller=$_POST["t3"];
 										$book_id=$_GET["id"];
                                         $class=$_GET["class"];
-										// echo "<script>alert('Booking Successful. Your Booking Id is $book_id')</script>";
-										echo "<script>window.location.href='booking_details.php?id=$book_id&email=$email&traveller=$no_of_traveller&class=$class'</script>";	
+                                        $type=$_GET["type"];
+										
+                                        $con = mysqli_connect("localhost", "root", "", "tour_database");
+                                        if (!$con)
+                                            die("cannot connect to server");
+                                        else {
+                                            $sqlcheck = "SELECT * FROM bookings ";
+                                            $result_check = mysqli_query($con,$sqlcheck);
+                                            if(mysqli_num_rows($result_check)> 0){
+                                            //     echo "Duplicate data found";
+                                            // } else{
+                                                
+                                                $sql = "INSERT INTO bookings (id, booking_type, booking_name, booking_email, no_of_traveller, booking_status) VALUES ('$book_id','$type', '$name', '$email', '$no_of_traveller', 'Unpaid')";
+                                                mysqli_query($con, $sql);
+                                                $sql2 = "SELECT * FROM bookings ORDER BY booking_id DESC;";
+                                                $result = mysqli_query($con,$sql2);
+                                                $row = mysqli_fetch_row($result);
+                                                $booking_id = $row[0];
+                                            } else {
+                                                echo "No bookings found";
+                                            }
+                                            // if (!$result) {
+                                            //     die('Error: ' . mysqli_error($con));
+                                            // } else {
+                                            //     echo 'Data inserted successfully';
+                                            // }
+                                        }
+
+										echo "<script>window.location.href='booking_details.php?booking_id=$booking_id&id=$book_id&email=$email&traveller=$no_of_traveller&class=$class'</script>";	
 									}
 								?>
                             </div>

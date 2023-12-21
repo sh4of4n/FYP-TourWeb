@@ -1,14 +1,9 @@
-<?php
-	session_start();
-	if(isset($_SESSION["reg_name"]))
-	{
-        $name = $_SESSION["reg_name"];
-?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <!-- Title -->
-        <title>SHOW DETAILS </title>
+        <title>SHOW DETAILS TO ADMIN</title>
         <!-- Meta -->
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="description" content="">
@@ -21,7 +16,7 @@
         <!-- Template CSS -->
         <link rel="stylesheet" href="assets/css/animate.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/font-awesome.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/nexus1.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/nexus12.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/responsive.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/custom.css" rel="stylesheet">
         <!-- Google Fonts-->
@@ -29,7 +24,7 @@
         <link href="http://fonts.googleapis.com/css?family=PT+Sans" type="text/css" rel="stylesheet">
         <link href="http://fonts.googleapis.com/css?family=Roboto:400,300" rel="stylesheet" type="text/css">
     </head>
-    <body>
+    <body style="width:1600px">
         <div id="body-bg">
             <ul class="social-icons pull-right hidden-xs">
                 <li class="social-rss">
@@ -46,7 +41,6 @@
                 </li>
             </ul>
             <div id="pre-header" class="container" style="height: 40px">
-                <!-- Spacing above header -->
             </div>
             <div id="header">
                 <div class="container">
@@ -63,31 +57,7 @@
                 <div class="row">
                     <div class="col-md-12 no-padding">
                         <div class="text-center visible-lg">
-                            <!-- <ul id="hornavmenu" class="nav navbar-nav">
-                                <li>
-                                    <a href="index.html" class="fa-home">Home</a>
-                                </li>
-                                <li>
-                                    <a href="pages-about-us.html" class="fa-gears">About Us</a>
-                                </li>    
-                                <li>
-                                    <a href="gallery.html" class="fa-th">Gallery</a>
-                                </li>
-                                <li>
-                                    <span class="fa-copy">Features</span>
-									<ul>
-                                        <li>
-                                            <a href="destination.html">Destinations</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-									<a href="pages-sign-up.php"  class="fa-font">Register/Log In</a>
-                                </li>
-                                <li>
-                                    <a href="contact.html" class="fa-comment">Contact Us</a>
-                                </li>
-                            </ul> -->
+                            
                         </div>
                     </div>
                 </div>
@@ -96,58 +66,65 @@
             </div>
             <div id="content-top-border" class="container">
             </div>
-            <div id="content">
+            <div id="content" style="width:1600px">
                 <div class="container background-white">
 					<div class="row margin-vert-30">
                         <div class="col-md-12">
-						<h1 style="text-align:center">MY BOOKINGS</h1>
-						<?php
-							$con=mysqli_connect("localhost","root","","tour_database");
-							if(!$con)
-								die("cannot connect to server");
-							else
-							{
-								$sql="SELECT * FROM bookings WHERE booking_name = '$name'";
+						<form method="post">
+							<?php
+								include("connect.php");
+						
+								$id=$_GET["id"];
+						
+								$sql="select * from bookings where booking_id='$id'";
 								$rs=mysqli_query($con,$sql);
-								if(mysqli_num_rows($rs)>0)
+								if(mysqli_num_rows($rs)==1)
 								{
+									$row=mysqli_fetch_array($rs);
 									echo "<table border='2px' align='center' cellpadding='20px' cellspacing='10px'>";
-									echo "<tr align='center'>";
+									echo "<tr>";
 									echo "<th>BOOKING ID</th>";
-									echo "<th>BOOKING TYPE</th>";
+                                    echo "<th>BOOKING TYPE</th>";
                                     echo "<th>BOOKING NAME</th>";
-									echo "<th>BOOKING EMAIL</th>";
-									echo "<th>NO OF TRAVELLER</th>";
-									echo "<th>BOOKING STATUS</th>";
-									echo "<th>PRICE PAID</th>";
+                                    echo "<th>BOOKING EMAIL</th>";
+                                    echo "<th>NO OF TRAVELLER</th>";
+                                    echo "<th>BOOKING STATUS</th>";
+                                    echo "<th>PRICE PAID</th>";
 									echo "</tr>";
-									while($row=mysqli_fetch_row($rs))
-										{
-											echo "<tr align='center'>";
-											echo "<td>$row[1]</td>";
-											echo "<td>$row[2]</td>";
-											echo "<td>$row[3]</td>";
-											echo "<td>$row[4]</td>";
-											echo "<td>$row[5]</td>";
-											echo "<td>$row[8]</td>";
-											echo "<td>$row[6]</td>";
-                                            echo "<td><a href='#' onclick=\"showDetails('$row[7]')\">DETAILS</a></td>";
-											echo "</tr>";
-										}
-										echo "</table>";
-									} else {
-                                        echo "<p> NO BOOKINGS FOUND </p>";
-                                    }
+									echo "<tr>";
+                                    echo "<td><input type='text' name='t1' value='$row[1]'></td>";
+                                    echo "<td><input type='text' name='t2' value='$row[2]'></td>";
+                                    echo "<td>$row[3]</td>";
+                                    echo "<td><input type='text' name='t4' value='$row[4]'></td>";
+                                    echo "<td><input type='text' name='t5' value='$row[5]'></td>";
+                                    echo "<td><input type='text' name='t8' value='$row[8]'></td>";
+                                    echo "<td><input type='text' name='t6' value='$row[6]'></td>";
+									echo "</tr>";
+									echo"<tr><td colspan='7' align='center'><input type='submit' name='btn6' value='UPDATE'></td></tr>";
+									echo "</table>";
 								}
 							?>
-                            <script>
-                            function showDetails(details) {
-                                var detailsArray = details.split(',');
-                                var detailsString = detailsArray.join('\n'); 
-
-                                alert(detailsString);
-                            }
-                            </script>
+						</form>
+						<?php
+							if(isset($_POST["btn6"]))
+							{
+								$id=$_GET["id"];
+								$booking_id=$_POST["t1"];
+                                $booking_type=$_POST["t2"];
+								$booking_email=$_POST["t4"];
+								$no_of_traveller=$_POST["t5"];
+                                $booking_status=$_POST["t8"];
+								$price=$_POST["t6"];
+				
+								$q="UPDATE bookings SET id='".$booking_id."', booking_type='".$booking_type."', booking_email='".$booking_email."', no_of_traveller='".$no_of_traveller."', booking_status='".$booking_status."', booking_price='".$price."' WHERE booking_id=".$id."";
+								$n=mysqli_query($con,$q);
+								if($n==1)
+								{
+									echo "<script>alert('information updated')</script>";
+									echo "<script>window.location.href='show_details.php?name=$row[3]'</script>";
+								}
+							}
+						?>
 						</div>
 					</div>
 				</div>
@@ -157,7 +134,6 @@
             <div id="base">
                 <div class="container padding-vert-30 margin-top-60">
                     <div class="row">
-                        <!-- Contact Details -->
                         <div class="col-md-4 margin-bottom-20">
                             <h3 class="margin-bottom-10">Contact Details</h3>
                             <p>
@@ -175,20 +151,8 @@
                                 <br>Ballygunge,
                                 <br>Kolkata, India</p>
                         </div>
-                        <div class="col-md-3 margin-bottom-20">
-						<h3 class="margin-bottom-10">Menu</h3>
-						<ul class="menu">
-							<li>
-								<a href="./user_login.php" class="fa-home">Home</a>
-							</li>
-							<li>
-								<a href="./web/booking.php" class="fa-copy">Bookings</a>
-							</li>
-						</ul>
-						<div class="clearfix"></div>
-					</div>
-                        <div class="col-md-1"></div>
-                        <!-- Disclaimer -->
+                        
+                        <div class="col-md-4"></div>
                         <div class="col-md-3 margin-bottom-20 padding-vert-30 text-center">
                             <h3 class="color-gray margin-bottom-10">Join our Newsletter</h3>
                             <p>
@@ -225,6 +189,3 @@
             <script src="assets/js/modernizr.custom.js" type="text/javascript"></script>
     </body>
 </html>
-<?php
-}
-?>

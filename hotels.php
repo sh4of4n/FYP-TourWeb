@@ -123,7 +123,7 @@
 											echo "<td>$row[3]</td>";
 											echo "<td>$row[4]</td>";
 											echo "<td>$row[5]</td>";
-                                            echo "<td><a href='user_booking.php?id=".$row[0]."&class=".$row[2]."'>Book</a></td>";
+                                            echo "<td><a href='user_booking.php?id=".$row[0]."&class=".$row[2]."&type=".'hotel'."'>Book</a></td>";
 											echo "</tr>";
 										}
 										echo "</table>";

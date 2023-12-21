@@ -120,8 +120,8 @@
 						?>	
 						<div class="row margin-vert-30"></div>
 						<form method="post">
-                        <div class="col-md-3">
-							<button class="btn btn-primary pull-right" type="submit" name="btn4">Show Hotel Details</button>
+                        <div class="col-md-3 text-center">
+							<button class="btn btn-primary center" type="submit" name="btn4">Show Hotel Details</button>
                         </div>
 						</form>
 						<?php
@@ -152,9 +152,22 @@
 								echo "<script>window.location.href='admin_details.php'</script>";	
 							}
 						?>
+                        <form method="post">
+						
+						<div class="col-md-3">
+							<button class="btn btn-primary pull-right" type="submit" name="btn9">Show User Booking Details</button>
+						</div>
+						</form>
+						<?php
+							if(isset($_POST["btn9"]))
+							{
+								echo "<script>window.location.href='show_userId.php'</script>";	
+							}
+						?>	
+                        <div class="row margin-vert-30"></div>
 						<form method="post">
-                        <div class="col-md-2">
-							<button class="btn btn-primary pull-right" type="submit" name="btn1">Log Out</button>
+                        <div class="col-md-12 text-center mb-3 mt-3">
+							<button class="btn btn-primary center" type="submit" name="btn1">Log Out</button>
                         </div>
 						</form>
 						<?php
